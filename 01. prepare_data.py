@@ -63,8 +63,8 @@ def get_num_features(all_features: List, cat_features: List) -> List:
 
     return num_feats
 
-
-def get_df_w_aggrs(df: pd.DataFrame, numerical_features: List) ->  pd.DataFrame:
+# features
+def get_df_w_aggrs(df: pd.DataFrame, feats: List) ->  pd.DataFrame:
     '''Returns dataframe with generated aggregates based on numerical features'''
 
     cid = pd.Categorical(df.pop('customer_ID'), ordered=True)
@@ -72,29 +72,29 @@ def get_df_w_aggrs(df: pd.DataFrame, numerical_features: List) ->  pd.DataFrame:
 
     df_min = (df
         .groupby(cid)
-        .min()[numerical_features]
-        .rename(columns={f: f"{f}_min" for f in numerical_features})
+        .min()[feats]
+        .rename(columns={f: f"{f}_min" for f in feats})
     )
     print(df_min.shape)
 
     df_max = (df
         .groupby(cid)
-        .max()[numerical_features]
-        .rename(columns={f: f"{f}_max" for f in numerical_features})
+        .max()[feats]
+        .rename(columns={f: f"{f}_max" for f in feats})
     )
     print(df_max.shape)
 
     df_avg = (df
         .drop('S_2', axis='columns')
         .groupby(cid)
-        .mean()[numerical_features]
-        .rename(columns={f: f"{f}_avg" for f in numerical_features})
+        .mean()[feats]
+        .rename(columns={f: f"{f}_avg" for f in feats})
     )
     print(df_avg.shape)
 
     df_last = (df
-        .loc[last, numerical_features]
-        .rename(columns={f: f"{f}_last" for f in numerical_features})
+        .loc[last, feats]
+        .rename(columns={f: f"{f}_last" for f in feats})
         .set_index(np.asarray(cid[last]))
     )
     print(df_last.shape)
@@ -142,7 +142,7 @@ def main() -> int:
     num_features = get_num_features(all_features, cat_features)
     # len(all_features), len(cat_features), len(num_features) -> (190, 11, 178)
 
-    df_train_agg = get_df_w_aggrs(df=df_train, numerical_features=num_features)
+    df_train_agg = get_df_w_aggrs(df=df_train, feats=all_features)
     df_train_target = get_target(TARGET_PATH='./data/train_labels.csv')
     df_train = get_train_data_with_target_merged(df_train=df_train_agg, df_train_target=df_train_target)
     
@@ -155,7 +155,7 @@ def main() -> int:
     '''
 
     df_test = get_test_data(TEST_PATH='./data/test.parquet')
-    df_test = get_df_w_aggrs(df=df_test, numerical_features=num_features)
+    df_test = get_df_w_aggrs(df=df_test, feats=all_features)
 
     # zapolnenie_train = check_zapolnenie(df_train)
     # zapolnenie_test = check_zapolnenie(df_test)
