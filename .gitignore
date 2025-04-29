@@ -2,3 +2,5 @@
 data
 *.xlsx
 *.csv
+
+catboost_info/
