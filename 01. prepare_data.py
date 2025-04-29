@@ -142,7 +142,7 @@ def main() -> int:
     num_features = get_num_features(all_features, cat_features)
     # len(all_features), len(cat_features), len(num_features) -> (190, 11, 178)
 
-    df_train_agg = get_df_w_aggrs(df=df_train, feats=all_features)
+    df_train_agg = get_df_w_aggrs(df=df_train, feats=num_features)
     df_train_target = get_target(TARGET_PATH='./data/train_labels.csv')
     df_train = get_train_data_with_target_merged(df_train=df_train_agg, df_train_target=df_train_target)
     
@@ -155,7 +155,7 @@ def main() -> int:
     '''
 
     df_test = get_test_data(TEST_PATH='./data/test.parquet')
-    df_test = get_df_w_aggrs(df=df_test, feats=all_features)
+    df_test = get_df_w_aggrs(df=df_test, feats=num_features)
 
     # zapolnenie_train = check_zapolnenie(df_train)
     # zapolnenie_test = check_zapolnenie(df_test)
