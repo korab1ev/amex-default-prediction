@@ -9,6 +9,7 @@ from utils.get_not_null_share_stats import get_not_null_share_df
 from utils.get_psi_calculated import calc_psi
 from utils.get_plot_distr import plot_distr
 from utils.get_pair_correlations import plot_group_corr_pair
+from utils.get_cat_feats_histograms import plot_cat_hist
 
 # Models
 from lightgbm import LGBMClassifier, log_evaluation
