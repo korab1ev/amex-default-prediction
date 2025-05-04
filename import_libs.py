@@ -10,6 +10,7 @@ from utils.get_psi_calculated import calc_psi
 from utils.get_plot_distr import plot_distr
 from utils.get_pair_correlations import plot_group_corr_pair
 from utils.get_cat_feats_histograms import plot_cat_hist
+from utils.get_amex_metric import get_amex_metric_calculated, lgb_amex_metric
 
 # Models
 from lightgbm import LGBMClassifier, log_evaluation
