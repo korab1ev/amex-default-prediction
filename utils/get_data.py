@@ -65,20 +65,23 @@ def get_num_features(all_features: List, cat_features: List) -> List:
 
 # features
 def get_df_w_aggrs(df: pd.DataFrame, feats: List) ->  pd.DataFrame:
-    '''Returns dataframe with generated aggregates based on numerical features'''
+    '''Returns dataframe with generated aggregates based on numerical and categorical features'''
 
     cid = pd.Categorical(df.pop('customer_ID'), ordered=True)
     last = (cid != np.roll(cid, -1)) # mask for last statement of every customer
 
+    # тех долг: hard coded last agg on categorical features
+    cat_features = ['B_30', 'B_38', 'D_114', 'D_116', 'D_117', 'D_120', 'D_126', 'D_63', 'D_64', 'D_66', 'D_68']
+    
     df_min = (df
-        .groupby(cid)
+        .groupby(cid, observed=True)
         .min()[feats]
         .rename(columns={f: f"{f}_min" for f in feats})
     )
     print(df_min.shape)
 
     df_max = (df
-        .groupby(cid)
+        .groupby(cid, observed=True)
         .max()[feats]
         .rename(columns={f: f"{f}_max" for f in feats})
     )
@@ -86,15 +89,15 @@ def get_df_w_aggrs(df: pd.DataFrame, feats: List) ->  pd.DataFrame:
 
     df_avg = (df
         .drop('S_2', axis='columns')
-        .groupby(cid)
+        .groupby(cid, observed=True)
         .mean()[feats]
         .rename(columns={f: f"{f}_avg" for f in feats})
     )
     print(df_avg.shape)
 
     df_last = (df
-        .loc[last, feats]
-        .rename(columns={f: f"{f}_last" for f in feats})
+        .loc[last, feats + cat_features] # hard coded this, тех. долг
+        .rename(columns={f: f"{f}_last" for f in feats + cat_features})
         .set_index(np.asarray(cid[last]))
     )
     print(df_last.shape)
