@@ -34,8 +34,12 @@ from optbinning import BinningProcess, OptimalBinning
 from sklearn.metrics import roc_auc_score
 from sklearn.linear_model import LogisticRegression
 
+# PyTorch
+import torch
+
 # Visualisation
 import matplotlib.pyplot as plt
+from matplotlib_venn import venn2
 import seaborn as sns
 import shap
 
