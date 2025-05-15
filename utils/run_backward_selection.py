@@ -88,7 +88,6 @@ def run_backward_selection(df_train,
             print(f" Amex = {sc:.5f}")
             fold_scores.append(sc)
             fold_test_raw.append(model.predict_proba(df_test[feats], raw_score=True))
-            # fold_test_raw.append(model.predict_proba(df_test[feats])[:,1]) # опять тут pd, а не скоры. глаз да глаз за этой темой
 
         mean_cv = float(np.mean(fold_scores))
 
