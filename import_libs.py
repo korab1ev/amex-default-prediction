@@ -13,7 +13,7 @@ from utils.get_cat_feats_histograms import plot_cat_hist
 from utils.get_amex_metric import get_amex_metric_calculated, lgb_amex_metric
 from utils.run_backward_selection import run_backward_selection
 
-# Models
+# Tree models
 from lightgbm import LGBMClassifier, log_evaluation
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
@@ -36,6 +36,10 @@ import optbinning
 from sklearn.metrics import roc_auc_score
 from sklearn.linear_model import LogisticRegression
 
+# TabNet
+from pytorch_tabnet.tab_model import TabNetClassifier, TabNetRegressor
+from pytorch_tabnet.metrics import Metric
+
 # PyTorch
 import torch
 
@@ -57,3 +61,9 @@ warnings.simplefilter(action = "ignore", category = RuntimeWarning)
 
 # Save files
 import pickle
+
+# TabNet experiments
+import os
+import random
+import psutil
+import time
