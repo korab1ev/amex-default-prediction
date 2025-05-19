@@ -15,6 +15,7 @@ from utils.run_backward_selection import run_backward_selection
 
 # Models
 from lightgbm import LGBMClassifier, log_evaluation
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from xgboost import XGBClassifier
 from catboost import CatBoostClassifier
