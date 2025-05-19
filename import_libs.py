@@ -31,7 +31,8 @@ from sklearn.preprocessing import KBinsDiscretizer, StandardScaler
 from sklearn.impute import SimpleImputer
 
 # Logistic regression
-from optbinning import BinningProcess, OptimalBinning
+import optbinning
+#from optbinning import BinningProcess, OptimalBinning
 from sklearn.metrics import roc_auc_score
 from sklearn.linear_model import LogisticRegression
 
