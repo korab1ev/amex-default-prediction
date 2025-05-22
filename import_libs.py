@@ -47,7 +47,13 @@ import torch
 import matplotlib.pyplot as plt
 from matplotlib_venn import venn2
 import seaborn as sns
+
+# Shap
 import shap
+
+# LIME
+import lime
+import lime.lime_tabular
 
 # Hyperparameter tuning
 import optuna
