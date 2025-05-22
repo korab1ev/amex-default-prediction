@@ -55,6 +55,9 @@ import shap
 import lime
 import lime.lime_tabular
 
+# DALEX
+import dalex as dx
+
 # Hyperparameter tuning
 import optuna
 
